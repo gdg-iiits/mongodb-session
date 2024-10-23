@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Books</title>
+</head>
+<body>
+  <h1>Book List</h1>
+  <ul>
+    <% books.forEach(book => { %>
+      <li>
+        <%= book.title %> by <%= book.author %> - <%= book.pages %> pages
+        <form action="/books/update/<%= book._id %>" method="POST" style="display: inline;">
+          <input type="text" name="title" value="<%= book.title %>" placeholder="Title">
+          <input type="text" name="author" value="<%= book.author %>" placeholder="Author">
+          <input type="number" name="pages" value="<%= book.pages %>" placeholder="Pages">
+          <button type="submit">Update</button>
+        </form>
+        <form action="/books/delete/<%= book._id %>" method="POST" style="display: inline;">
+          <button type="submit">Delete</button>
+        </form>
+      </li>
+    <% }) %>
+  </ul>
+
+  <h2>Add New Book</h2>
+  <form action="/books" method="POST">
+    <input type="text" name="title" placeholder="Title" required>
+    <input type="text" name="author" placeholder="Author" required>
+    <input type="number" name="pages" placeholder="Pages" required>
+    <button type="submit">Add Book</button>
+  </form>
+</body>
+</html>
